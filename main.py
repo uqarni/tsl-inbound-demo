@@ -23,22 +23,22 @@ def main():
     
     #variables for system prompt
     name = "Sam"
-    email = st.text_input("Lead Email", value="")
-    phone = st.text_input("Lead Phone", value="")
-    lastname = st.text_input("Lead Last Name", value="")
-    firstname = st.text_input("Lead First Name", value="")
-    what_is_your_age_ = st.text_input("Lead Age", value="")
-    what_is_your_current_annual_income_ = st.text_input("Lead Annual Income", value="")
-    how_did_you_originally_hear_about_us_ = st.text_input("Lead Discovery Source", value="")
-    which_job_title_do_you_most_identify_with_ = st.text_input("Lead Job Title", value="")
-    how_many_times_have_you_been_paid_to_speak_ = st.text_input("Times Paid to Speak", value="")
-    what_is_your_highest_level_of_education_completed = st.text_input("Lead Education Level", value="")
-    how_much_do_you_currently_make_per_month_speaking_ = st.text_input("Lead Monthly Speaking Income", value="")
-    what_industry_do_you_speak_in_or_hope_to_speak_in_ = st.text_input("Lead Speaking Industry", value="")
-    please_list_your_speaking_website_or_linkedin_profile_here_ = st.text_input("Lead Speaking Website/LinkedIn", value="")
-    what_is_your_desired_monthly_income_from_speaking_what_is_your_goal_ = st.text_input("Lead Desired Monthly Income from Speaking", value="")
-    on_a_scale_of_1_10_how_commited_and_ready_are_you_to_invest_in_yourself_in_order_to_get_booked_and = st.text_input("Lead Commitment Level", value="")
-    what_is_your_biggest_challenge_in_hitting_your_monthly_income_goal_of3_000___5_000_from_speaking = st.text_input("Lead Biggest Challenge to Hitting Monthly Goal", value="")
+    email = st.text_input("Lead Email", value="john@doe.com")
+    phone = st.text_input("Lead Phone", value="282-222-3333")
+    lastname = st.text_input("Lead Last Name", value="Doe")
+    firstname = st.text_input("Lead First Name", value="John")
+    what_is_your_age_ = st.text_input("Lead Age", value="20")
+    what_is_your_current_annual_income_ = st.text_input("Lead Annual Income", value="$150,000")
+    how_did_you_originally_hear_about_us_ = st.text_input("Lead Discovery Source", value="LinkedIn")
+    which_job_title_do_you_most_identify_with_ = st.text_input("Lead Job Title", value="Director")
+    how_many_times_have_you_been_paid_to_speak_ = st.text_input("Times Paid to Speak", value="10+")
+    what_is_your_highest_level_of_education_completed = st.text_input("Lead Education Level", value="Bachelors")
+    how_much_do_you_currently_make_per_month_speaking_ = st.text_input("Lead Monthly Speaking Income", value="$3,000")
+    what_industry_do_you_speak_in_or_hope_to_speak_in_ = st.text_input("Lead Speaking Industry", value="Sales")
+    please_list_your_speaking_website_or_linkedin_profile_here_ = st.text_input("Lead Speaking Website/LinkedIn", value="www.johndoespeaking.com")
+    what_is_your_desired_monthly_income_from_speaking_what_is_your_goal_ = st.text_input("Lead Desired Monthly Income from Speaking", value="$10,000")
+    on_a_scale_of_1_10_how_commited_and_ready_are_you_to_invest_in_yourself_in_order_to_get_booked_and = st.text_input("Lead Commitment Level", value="9")
+    what_is_your_biggest_challenge_in_hitting_your_monthly_income_goal_of3_000___5_000_from_speaking = st.text_input("Lead Biggest Challenge to Hitting Monthly Goal", value="I don't know how to get more clients")
 
     prompt_variables = {
         "name": name,
