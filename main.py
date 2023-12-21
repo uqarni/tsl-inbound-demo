@@ -11,54 +11,60 @@ urL: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 
 supabase: Client = create_client(urL, key)
-data, count = supabase.table("bots_dev").select("*").eq("id", "mike").execute()
+data, count = supabase.table("bots_dev").select("*").eq("id", "inbound_sam").execute()
 bot_info = data[1][0]
 
 def main():
 
     # Create a title for the chat interface
-    st.title("Improovy Bot")
-    st.write("This is a testing website to play around with Mike’s conversational examples. The following script is going to be used for responding to customers who left a voicemail, or customers who fill out a form after hours or the weekend. Mike’s explicit goal is to have an organic conversation with them and schedule a call with an Improovy team member. Mike will be turned off during business hours to allow for the sales team to contact the prospects directly.")
-    st.write("The fields below mirror what people fill out on the onboarding form. Please have conversations directly with Mike as if you are a prospect, and add your feedback to the examples on this google doc.\n\nhttps://docs.google.com/document/d/1g1oo1O7LW4gTlLx-F8PVJD3FJ6I2zLUhzbAoJD4g6V8/edit\n\nHere’s a loom video that outlines the instructions on how to add your feedback.\n\nhttps://www.loom.com/share/9d3f96be9ad142b28fed237b089f473c?sid=29b669d9-4181-4bab-96af-9a30dfbdde1a")
+    st.title("Inbound Sam Bot")
 
     st.write("These are standin variables to demonstrate the bot's ability to integrate variables into its instruction set.")
     
     #variables for system prompt
-    name = 'Mike'
-    booking_link = 'https://calendly.com/d/y7c-t9v-tnj/15-minute-meeting-with-improovy-painting-expert'
-    initial_description = st.text_input("add project description here")
+    name = "Sam"
+    email = st.text_input("Lead Email", value="")
+    phone = st.text_input("Lead Phone", value="")
+    lastname = st.text_input("Lead Last Name", value="")
+    firstname = st.text_input("Lead First Name", value="")
+    what_is_your_age_ = st.text_input("Lead Age", value="")
+    what_is_your_current_annual_income_ = st.text_input("Lead Annual Income", value="")
+    how_did_you_originally_hear_about_us_ = st.text_input("Lead Discovery Source", value="")
+    which_job_title_do_you_most_identify_with_ = st.text_input("Lead Job Title", value="")
+    how_many_times_have_you_been_paid_to_speak_ = st.text_input("Times Paid to Speak", value="")
+    what_is_your_highest_level_of_education_completed = st.text_input("Lead Education Level", value="")
+    how_much_do_you_currently_make_per_month_speaking_ = st.text_input("Lead Monthly Speaking Income", value="")
+    what_industry_do_you_speak_in_or_hope_to_speak_in_ = st.text_input("Lead Speaking Industry", value="")
+    please_list_your_speaking_website_or_linkedin_profile_here_ = st.text_input("Lead Speaking Website/LinkedIn", value="")
+    what_is_your_desired_monthly_income_from_speaking_what_is_your_goal_ = st.text_input("Lead Desired Monthly Income from Speaking", value="")
+    on_a_scale_of_1_10_how_commited_and_ready_are_you_to_invest_in_yourself_in_order_to_get_booked_and = st.text_input("Lead Commitment Level", value="")
+    what_is_your_biggest_challenge_in_hitting_your_monthly_income_goal_of3_000___5_000_from_speaking = st.text_input("Lead Biggest Challenge to Hitting Monthly Goal", value="")
 
-    #from contact
-    lead_full_name = "John Doe"
-    email = "johndoe@gmail.com"
-    address=st.text_input('enter address')
-    additional_notes = 'n/a'
-    #from deal
-    status='open'
-    stage='uncontacted lead'
-
-    timeline='1-2 weeks'
-    spreadsheet='spreadsheet.com/sheet'
-    zipcode= st.text_input('zip code', value = 'unknown')
-    interior_surfaces = 'unknown'
-    interior_wall_height = 'unknown'
-    exterior_surfaces = 'unknown'
-    exterior_wall_height = 'unknown'
-    
-    #from booking
-    resched_link='none'
-    cancel_link='none'
-    meeting_booked='none'
-    meeting_time='none'
+    prompt_variables = {
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "lastname": lastname,
+        "firstname": firstname,
+        "what_is_your_age_": what_is_your_age_,
+        "what_is_your_current_annual_income_": what_is_your_current_annual_income_,
+        "how_did_you_originally_hear_about_us_": how_did_you_originally_hear_about_us_,
+        "which_job_title_do_you_most_identify_with_": which_job_title_do_you_most_identify_with_,
+        "how_many_times_have_you_been_paid_to_speak_": how_many_times_have_you_been_paid_to_speak_,
+        "what_is_your_highest_level_of_education_completed": what_is_your_highest_level_of_education_completed,
+        "how_much_do_you_currently_make_per_month_speaking_": how_much_do_you_currently_make_per_month_speaking_,
+        "what_industry_do_you_speak_in_or_hope_to_speak_in_": what_industry_do_you_speak_in_or_hope_to_speak_in_,
+        "please_list_your_speaking_website_or_linkedin_profile_here_": please_list_your_speaking_website_or_linkedin_profile_here_,
+        "what_is_your_desired_monthly_income_from_speaking_what_is_your_goal_": what_is_your_desired_monthly_income_from_speaking_what_is_your_goal_,
+        "on_a_scale_of_1_10_how_commited_and_ready_are_you_to_invest_in_yourself_in_order_to_get_booked_and": on_a_scale_of_1_10_how_commited_and_ready_are_you_to_invest_in_yourself_in_order_to_get_booked_and,
+        "what_is_your_biggest_challenge_in_hitting_your_monthly_income_goal_of3_000___5_000_from_speaking": what_is_your_biggest_challenge_in_hitting_your_monthly_income_goal_of3_000___5_000_from_speaking,
+        "reschedule_link": "N/A"
+    }
 
     system_prompt = bot_info['system_prompt']
-    system_prompt = system_prompt.format(name = name, booking_link = booking_link, initial_description = initial_description, lead_full_name = lead_full_name, email = email,
-                                         address = address, status = status, stage = stage, timeline = timeline, spreadsheet = spreadsheet, zipcode = zipcode, interior_surfaces = interior_surfaces,
-                                         interior_wall_height = interior_wall_height, exterior_surfaces = exterior_surfaces, exterior_wall_height = exterior_wall_height, resched_link = resched_link,
-                                         cancel_link = cancel_link, meeting_booked = meeting_booked, meeting_time = meeting_time, additional_notes = additional_notes)
-
+    system_prompt = system_prompt.format(**prompt_variables)
     initial_text = bot_info['initial_text']
-    initial_text = initial_text.format(name = name, first_name = lead_full_name, description = initial_description, address = address, booking_link = booking_link)
+    initial_text = initial_text.format(**prompt_variables)
 
     
     if st.button('Click to Start or Restart'):
